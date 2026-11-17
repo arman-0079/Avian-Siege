@@ -1,0 +1,6 @@
+{
+  "name": "Avian Siege",
+  "description": "A realistic high-graphics physics slingshot siege game powered by Matter.js, HTML5 Canvas, and Web Audio API with 30 campaign levels, 7 specialized birds, 5 pig variants, level editor, endless mode, and daily challenges.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
