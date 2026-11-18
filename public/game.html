@@ -6,7 +6,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='34' r='26' fill='%23dc2626' stroke='%23240b05' stroke-width='4'/%3E%3Cellipse cx='32' cy='46' rx='14' ry='8' fill='%23fef3c7'/%3E%3Ccircle cx='24' cy='29' r='5' fill='%23fff'/%3E%3Ccircle cx='25' cy='29' r='2.4' fill='%23090d16'/%3E%3Ccircle cx='40' cy='29' r='5' fill='%23fff'/%3E%3Ccircle cx='39' cy='29' r='2.4' fill='%23090d16'/%3E%3Cpath d='M16 20 L32 25 L48 20' stroke='%231e110a' stroke-width='4.5' stroke-linecap='round' fill='none'/%3E%3Cpolygon points='32,33 46,38 32,43' fill='%23fbbf24'/%3E%3C/svg%3E">
 <title>Avian Siege — Physics Slingshot Game</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
-<script src="https://sdk.crazygames.com/crazygames-sdk-v3.js" async></script>
+<script id="cg-sdk-script" src="https://sdk.crazygames.com/crazygames-sdk-v3.js" async onload="this.dataset.done='1'" onerror="this.dataset.done='err'"></script>
 <style>
   :root {
     --bg-deep: #0b1120;
@@ -5101,9 +5101,28 @@
       try { if (sdk && sdk.game && sdk.game.happytime) sdk.game.happytime(); } catch (_) {}
     }
 
+    async function waitForSDKScript(timeoutMs = 1600) {
+      if (getSDK()) return getSDK();
+      const el = document.getElementById('cg-sdk-script');
+      if (!el || el.dataset.done) return getSDK();
+      await new Promise((resolve) => {
+        let settled = false;
+        const finish = () => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          resolve();
+        };
+        const timer = setTimeout(finish, timeoutMs);
+        el.addEventListener('load', finish, { once: true });
+        el.addEventListener('error', finish, { once: true });
+      });
+      return getSDK();
+    }
+
     async function init() {
       if (initialized) return sdkEnv;
-      const sdk = getSDK();
+      const sdk = await waitForSDKScript(1600);
       if (!sdk) {
         sdkEnv = 'local';
         initialized = true;

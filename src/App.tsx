@@ -3,12 +3,17 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 export default function App() {
   const mainRef = useRef<HTMLElement | null>(null);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [loaded, setLoaded] = useState(false);
+
+  const iframeSrc = useMemo(() => {
+    const search = typeof window !== 'undefined' ? window.location.search : '';
+    return `./game.html${search}`;
+  }, []);
 
   const handleIframeLoad = useCallback(() => {
     setLoaded(true);
@@ -17,8 +22,9 @@ export default function App() {
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin) return;
-      if (event.data && event.data.type === 'AVIAN_TOGGLE_FULLSCREEN') {
+      const childWin = iframeRef.current?.contentWindow;
+
+      if (event.origin === window.location.origin && event.data && event.data.type === 'AVIAN_TOGGLE_FULLSCREEN') {
         const doc = document as Document & {
           webkitFullscreenElement?: Element;
           webkitExitFullscreen?: () => Promise<void>;
@@ -33,6 +39,16 @@ export default function App() {
           };
           if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
           else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen().catch(() => {});
+        }
+        return;
+      }
+
+      // Bridge CrazyGames GameFrame postMessages transparently between parent and game iframe
+      if (window.parent !== window) {
+        if (childWin && event.source === childWin) {
+          try { window.parent.postMessage(event.data, '*'); } catch {}
+        } else if (childWin && event.source === window.parent) {
+          try { childWin.postMessage(event.data, window.location.origin); } catch {}
         }
       }
     };
@@ -56,12 +72,11 @@ export default function App() {
 
       <iframe
         ref={iframeRef}
-        src="/game.html"
+        src={iframeSrc}
         title="Avian Siege Physics Game"
         onLoad={handleIframeLoad}
         className="w-full h-full border-0 block"
         allow="autoplay; fullscreen; clipboard-write; gamepad"
-        allowFullScreen
       />
     </main>
   );
