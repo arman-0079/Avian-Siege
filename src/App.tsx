@@ -4,9 +4,11 @@
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import GameInfoSection from './components/GameInfoSection';
+import { initAnalytics } from './utils/analytics';
 
 export default function App() {
-  const mainRef = useRef<HTMLElement | null>(null);
+  const stageRef = useRef<HTMLElement | null>(null);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -18,6 +20,15 @@ export default function App() {
   const handleIframeLoad = useCallback(() => {
     setLoaded(true);
     iframeRef.current?.focus();
+  }, []);
+
+  const handleBackToGame = useCallback(() => {
+    stageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    iframeRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    initAnalytics();
   }, []);
 
   useEffect(() => {
@@ -33,8 +44,8 @@ export default function App() {
         if (fsEl) {
           if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
           else if (doc.webkitExitFullscreen) doc.webkitExitFullscreen().catch(() => {});
-        } else if (mainRef.current) {
-          const el = mainRef.current as HTMLElement & {
+        } else if (stageRef.current) {
+          const el = stageRef.current as HTMLElement & {
             webkitRequestFullscreen?: () => Promise<void>;
           };
           if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
@@ -57,27 +68,36 @@ export default function App() {
   }, []);
 
   return (
-    <main ref={mainRef} className="relative w-full h-[100dvh] overflow-hidden bg-[#090d16]">
-      {!loaded && (
-        <div
-          className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#090d16] text-slate-200 z-10"
-          aria-live="polite"
-        >
-          <div className="w-9 h-9 rounded-full border-2 border-amber-500/30 border-t-amber-400 animate-spin" />
-          <p className="text-sm font-medium tracking-wide text-slate-300">
-            Loading Avian Siege...
-          </p>
-        </div>
-      )}
+    <main className="w-full min-h-[100dvh] bg-[#090d16] text-slate-100">
+      <section
+        id="game-stage"
+        ref={stageRef}
+        aria-label="Play Avian Siege"
+        className="relative w-full h-[100dvh] overflow-hidden bg-[#090d16]"
+      >
+        {!loaded && (
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#090d16] text-slate-200 z-10"
+            aria-live="polite"
+          >
+            <div className="w-9 h-9 rounded-full border-2 border-amber-500/30 border-t-amber-400 animate-spin" />
+            <p className="text-sm font-medium tracking-wide text-slate-300">
+              Loading Avian Siege...
+            </p>
+          </div>
+        )}
 
-      <iframe
-        ref={iframeRef}
-        src={iframeSrc}
-        title="Avian Siege Physics Game"
-        onLoad={handleIframeLoad}
-        className="w-full h-full border-0 block"
-        allow="autoplay; fullscreen; clipboard-write; gamepad"
-      />
+        <iframe
+          ref={iframeRef}
+          src={iframeSrc}
+          title="Avian Siege - Free Online Physics Slingshot Game"
+          onLoad={handleIframeLoad}
+          className="w-full h-full border-0 block"
+          allow="autoplay; fullscreen; clipboard-write; gamepad"
+        />
+      </section>
+
+      <GameInfoSection onBackToGame={handleBackToGame} />
     </main>
   );
 }

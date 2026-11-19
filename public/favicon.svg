@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0f172a"/>
+  <rect x="16" y="16" width="480" height="480" rx="98" fill="none" stroke="#f59e0b" stroke-width="12" stroke-opacity="0.35"/>
+  <!-- Tail feathers -->
+  <polygon points="74,254 140,236 140,278" fill="#18181b"/>
+  <polygon points="62,286 136,272 136,308" fill="#09090b"/>
+  <!-- Top crest feathers -->
+  <ellipse cx="222" cy="116" rx="52" ry="28" transform="rotate(-28 222 116)" fill="#dc2626" stroke="#450a0a" stroke-width="12"/>
+  <ellipse cx="272" cy="100" rx="42" ry="22" transform="rotate(-12 272 100)" fill="#ef4444" stroke="#450a0a" stroke-width="12"/>
+  <!-- Main crimson body -->
+  <circle cx="268" cy="284" r="154" fill="#dc2626" stroke="#450a0a" stroke-width="16"/>
+  <!-- Subtle top highlight -->
+  <ellipse cx="232" cy="196" rx="68" ry="30" transform="rotate(-18 232 196)" fill="#f87171" opacity="0.45"/>
+  <!-- Belly patch -->
+  <ellipse cx="268" cy="368" rx="92" ry="52" fill="#fef3c7"/>
+  <!-- Eyes -->
+  <circle cx="220" cy="252" r="34" fill="#ffffff" stroke="#1c1917" stroke-width="8"/>
+  <circle cx="229" cy="252" r="16" fill="#0f172a"/>
+  <circle cx="234" cy="245" r="6" fill="#ffffff"/>
+  <circle cx="316" cy="252" r="34" fill="#ffffff" stroke="#1c1917" stroke-width="8"/>
+  <circle cx="307" cy="252" r="16" fill="#0f172a"/>
+  <circle cx="312" cy="245" r="6" fill="#ffffff"/>
+  <!-- Determined brow -->
+  <path d="M164 196 L268 230 L372 196" fill="none" stroke="#18181b" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Golden beak -->
+  <polygon points="268,274 366,304 268,332" fill="#fbbf24" stroke="#78350f" stroke-width="10" stroke-linejoin="round"/>
+  <polygon points="268,332 346,312 268,354" fill="#d97706" stroke="#78350f" stroke-width="10" stroke-linejoin="round"/>
+</svg>

@@ -2,22 +2,163 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='34' r='26' fill='%23dc2626' stroke='%23240b05' stroke-width='4'/%3E%3Cellipse cx='32' cy='46' rx='14' ry='8' fill='%23fef3c7'/%3E%3Ccircle cx='24' cy='29' r='5' fill='%23fff'/%3E%3Ccircle cx='25' cy='29' r='2.4' fill='%23090d16'/%3E%3Ccircle cx='40' cy='29' r='5' fill='%23fff'/%3E%3Ccircle cx='39' cy='29' r='2.4' fill='%23090d16'/%3E%3Cpath d='M16 20 L32 25 L48 20' stroke='%231e110a' stroke-width='4.5' stroke-linecap='round' fill='none'/%3E%3Cpolygon points='32,33 46,38 32,43' fill='%23fbbf24'/%3E%3C/svg%3E" />
-    <title>Avian Siege — Physics Slingshot Game</title>
-    <meta name="description" content="A realistic high-graphics physics slingshot siege game with 30 campaign levels across 3 worlds, 7 specialized birds, 6 destructible materials, level editor, endless mode, and daily challenges." />
-    <meta property="og:title" content="Avian Siege — Physics Slingshot Game" />
-    <meta property="og:description" content="A realistic high-graphics physics slingshot siege game powered by Matter.js, HTML5 Canvas, and Web Audio API." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://avian-siege.vercel.app/" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#090d16" />
+
+    <title>Avian Siege - Free Online Physics Slingshot Game</title>
+    <meta
+      name="description"
+      content="Play Avian Siege, a free online physics slingshot game. Launch 7 specialized birds to smash 6 destructible materials across 30 campaign levels and 3 worlds."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta name="google-site-verification" content="oXUm31ltrpR-YS_gfyVujre0rAT07uotxYYAMCjsQwM" />
+
     <link rel="canonical" href="https://avian-siege.vercel.app/" />
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="./sitemap.xml" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://avian-siege.vercel.app/sitemap.xml" />
+
+    <!-- Favicons & App Manifest -->
+    <link rel="icon" href="./favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="./favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Avian Siege" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://avian-siege.vercel.app/" />
+    <meta property="og:title" content="Avian Siege - Free Online Physics Slingshot Game" />
+    <meta
+      property="og:description"
+      content="Play Avian Siege, a free online physics slingshot game. Launch 7 specialized birds to smash 6 destructible materials across 30 campaign levels and 3 worlds."
+    />
+    <meta property="og:image" content="https://avian-siege.vercel.app/og-cover.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content="Avian Siege physics slingshot siege game cover artwork" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://avian-siege.vercel.app/" />
+    <meta name="twitter:title" content="Avian Siege - Free Online Physics Slingshot Game" />
+    <meta
+      name="twitter:description"
+      content="Play Avian Siege, a free online physics slingshot game. Launch 7 specialized birds to smash 6 destructible materials across 30 campaign levels and 3 worlds."
+    />
+    <meta name="twitter:image" content="https://avian-siege.vercel.app/og-cover.jpg" />
+    <meta name="twitter:image:alt" content="Avian Siege physics slingshot siege game cover artwork" />
+
+    <!-- Non-blocking Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- Structured Data (Only verified game facts) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://avian-siege.vercel.app/#website",
+            "name": "Avian Siege",
+            "url": "https://avian-siege.vercel.app/",
+            "description": "Free online 2D physics slingshot siege game powered by Matter.js and HTML5 Canvas.",
+            "inLanguage": "en"
+          },
+          {
+            "@type": "VideoGame",
+            "@id": "https://avian-siege.vercel.app/#game",
+            "name": "Avian Siege",
+            "url": "https://avian-siege.vercel.app/",
+            "image": "https://avian-siege.vercel.app/og-cover.jpg",
+            "description": "Avian Siege is a free online physics slingshot game featuring 30 campaign levels across 3 themed worlds, 7 specialized birds, 6 destructible materials, daily challenges, endless mode, and a custom level editor.",
+            "genre": ["Physics", "Puzzle", "Strategy", "Arcade"],
+            "gamePlatform": ["Web Browser", "Mobile Web"],
+            "applicationCategory": "GameApplication",
+            "operatingSystem": "Web Browser",
+            "playMode": "SinglePlayer",
+            "inLanguage": "en"
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://avian-siege.vercel.app/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is Avian Siege?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Avian Siege is a free online 2D physics slingshot game built with Matter.js and HTML5 Canvas. You launch a flock of seven specialized birds to topple fortified towers across 30 campaign levels, daily challenges, endless waves, and a custom level editor."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do you play Avian Siege?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Drag the slingshot pouch back to aim your trajectory, release to launch a bird toward the enemy fortress, and click, tap, or press Space mid-flight to trigger that bird's special ability. Clear all pigs on the map before running out of birds."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Avian Siege free to play?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Avian Siege is completely free to play directly in your web browser with no downloads, account registration, or paid locks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I play Avian Siege on mobile?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Avian Siege supports touch controls on smartphones and tablets in both portrait and landscape orientations, including touch-and-drag slingshot aiming, mid-air tap abilities, one-finger camera panning, and two-finger pinch-to-zoom."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Avian Siege work directly in a browser?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. The game runs natively inside modern desktop and mobile web browsers using HTML5 Canvas, Matter.js rigid-body physics, and synthesized Web Audio sound effects with no plugins required."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
-  <body class="bg-slate-950 text-slate-100 overflow-hidden select-none">
+  <body class="bg-slate-950 text-slate-100">
     <div id="root"></div>
+    <noscript>
+      <main style="max-width:760px;margin:2rem auto;padding:1.5rem;font-family:system-ui,sans-serif;line-height:1.6;color:#e2e8f0;">
+        <h1>Avian Siege - Free Online Physics Slingshot Game</h1>
+        <p>
+          Avian Siege is a free online physics slingshot game powered by Matter.js and HTML5 Canvas.
+          Launch 7 specialized birds to smash Wood, Glass, Stone, Ice, Metal, and TNT across 30 campaign
+          levels in Green Hills, Snowy Mountains, and Obsidian Caldera, plus Daily Challenges, Endless
+          Survival waves, and a Sandbox Level Editor.
+        </p>
+        <p>Enable JavaScript to play Avian Siege directly in your desktop or mobile browser.</p>
+      </main>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
